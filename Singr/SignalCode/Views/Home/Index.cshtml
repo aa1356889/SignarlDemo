@@ -1,0 +1,27 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<script src="~/Scripts/jquery-1.6.4.js"></script>
+<form>
+<input type="text" id="message" name="message" />
+<input type="submit" value="广播消息!" onclick="return onSubmit()" />
+</form>
+<script>
+    function onSubmit() {
+        $.ajax({
+            url: '@Url.Action("Push")',
+            data: { msg: $("#message").val() },
+            type: 'post',
+            dataType: 'json',
+            success: function (result) {
+                //                if (result.IsSuccess) {
+                //                    alert(result.Message);
+                //                    $('#message').val('');
+                //                }
+            }
+        })
+        return false;
+    }
+</script>

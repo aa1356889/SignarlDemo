@@ -1,0 +1,31 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<script src="~/Scripts/jquery-1.6.4.js"></script>
+<script src="@Url.Content("~/Scripts/jquery.signalR-2.2.0.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Signalr/Hubs")"></script>
+<script type="text/javascript">
+
+    $(function () {
+        var pushHub = $.connection.pushHub;
+        //服务器端调用客户端代码
+        pushHub.client.notice = function (message) {
+
+            alert(message);
+        }
+        $.connection.hub.start();
+    })
+
+</script>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+    <div>
+    </div>
+</body>
+</html>

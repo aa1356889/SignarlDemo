@@ -1,0 +1,51 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <script src="~/Scripts/jquery-1.6.4.js"></script>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+    <script type="text/javascript">
+        $(function () {
+
+            $("#submmit").click(function () {
+                alert("aa");
+                var paramters = $("#for").serialize();
+                $.post("@Url.Action("ProcessLogin")", paramters, function (ajaxOjb) {
+                    if (ajaxOjb.state == 1) {
+                        alert(ajaxOjb.message)
+                        window.location = "@Url.Action("Index", "Notice")";
+                    }
+                }, "json")
+            })
+        })
+
+    </script>
+</head>
+<body>
+    <div>
+        <form id="for">
+            <table>
+                <tr>
+                    <td>用户名</td>
+                    <td>
+                        <input type="text" name="LoginName" /></td>
+                </tr>
+                <tr>
+                    <td>密码</td>
+                    <td>
+                        <input type="text" name="Pwd" /></td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <input type="button" id="submmit" value="提交" /></td>
+                </tr>
+            </table>
+        </form>
+    </div>
+</body>
+</html>
