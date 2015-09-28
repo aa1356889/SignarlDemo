@@ -8,6 +8,7 @@ namespace SignalRDemo.Models
     /// <summary>
     /// 用户表
     /// </summary>
+      [Serializable]
     public class Users
     {
         /// <summary>

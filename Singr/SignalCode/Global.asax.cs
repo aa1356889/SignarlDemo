@@ -15,7 +15,8 @@ namespace SignalCode
         protected void Application_Start()
         {
             AreaRegistration.RegisterAllAreas();
-
+            System.Threading.Thread td = new System.Threading.Thread(MSMQ.MSMQHelper.ThJt);
+            td.Start();
             WebApiConfig.Register(GlobalConfiguration.Configuration);
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);

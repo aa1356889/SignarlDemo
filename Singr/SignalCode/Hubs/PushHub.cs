@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNet.SignalR;
+using SignalCode.MSMQ;
 using SignalRDemo.Models;
 using System;
 using System.Collections.Generic;
@@ -13,7 +14,7 @@ namespace SignalRDemo.Hubs
 
         protected static IHubContext ZmHubContext = GlobalHost.ConnectionManager.GetHubContext<PushHub>();
         //暂时用这个存在线用户的链接标示 集群情况下改为redis存
-        private static List<Users> Users = new List<Users>();
+        public static List<Users> Users = new List<Users>();
         /// <summary>
         /// 重写连接事件
         /// </summary>
@@ -65,7 +66,9 @@ namespace SignalRDemo.Hubs
             //表示用户离线状态
             if (user == null)
             {
+                MessageCenter center=new MessageCenter(){Content=message,ReceiveUserID=loginName,SendUserID=HttpContext.Current.User.Identity.Name};
                 //仍回队列
+                MSMQHelper.SendMessage<MessageCenter>(center);
             }
             else
             {
